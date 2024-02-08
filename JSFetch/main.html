@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <style>
+      .blue-background {
+        background-color: #007bff !important;
+        color: white;
+      }
+      .green-background {
+        background-color: #28a745 !important;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <table class="table table-striped" id="cryptoTable">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Symbol</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script>
+      fetch(
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const tableBody = document.querySelector("#cryptoTable tbody");
+          data.forEach((item, index) => {
+            const row = document.createElement("tr");
+            if (index < 5) {
+              row.classList.add("blue-background");
+            }
+            if (item.symbol === "usdt") {
+              row.classList.add("green-background");
+            }
+            row.innerHTML = `<td>${item.id}</td><td>${item.symbol}</td><td>${item.name}</td>`;
+            tableBody.appendChild(row);
+          });
+        });
+    </script>
+  </body>
+</html>
