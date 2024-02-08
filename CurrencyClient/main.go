@@ -87,7 +87,7 @@ func main() {
 			}
 		}
 
-		fmt.Println(time.Now().Format("00:00:00"))
+		fmt.Println(time.Now().Format("15:04:05"))
 		time.Sleep(10 * time.Minute)
 	}
 }
